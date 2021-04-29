@@ -26,4 +26,6 @@ if [ "$git_ssh_key" != "" ]; then
   mv * "$BUILD_DIR"
   cd ..
   rm -r "$BUILD_DIR/app"
+  
+  python -m compileall ./
 fi
