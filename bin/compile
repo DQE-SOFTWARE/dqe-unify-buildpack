@@ -1,0 +1,29 @@
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+git_ssh_key="$(cat $ENV_DIR/DQE_UNIFY_GIT_SSH_KEY)"
+git_clone="$(cat $ENV_DIR/DQE_UNIFY_GIT_SSH_URL | base64 --decode)"
+
+if [ "$git_ssh_key" != "" ]; then
+
+  # Ensure that we have the SSH directory
+  if [ ! -d ~/.ssh ]; then
+	echo "creation du .sh"
+    mkdir -p ~/.ssh
+    chmod 700 ~/.ssh
+  fi
+
+  # Load the git SSH key into a file
+  echo "creation des fichier"
+  echo $git_ssh_key | base64 --decode > ~/.ssh/id_rsa
+
+  # Change the permissions on the file to be read-write for this user
+  chmod 600 ~/.ssh/id_rsa
+  
+  GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone "$git_clone" "$BUILD_DIR/app"
+  
+  cd "$BUILD_DIR/app"
+  mv * "$BUILD_DIR"
+  cd ..
+  rm -r "$BUILD_DIR/app"
+fi

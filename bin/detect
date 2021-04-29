@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Building package with Git SSH key"
+exit 0
