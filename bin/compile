@@ -4,6 +4,8 @@ ENV_DIR=$3
 git_ssh_key="$(cat $ENV_DIR/DQE_UNIFY_SERVER_GIT_SSH_KEY)"
 git_clone="$(cat $ENV_DIR/DQE_UNIFY_SERVER_GIT_SSH_URL | base64 --decode)"
 
+echo $ENV_DIR/DQE_UNIFY_SERVER_ADDON_PLAN
+
 if [ "$git_ssh_key" != "" ]; then
 
   # Ensure that we have the SSH directory
