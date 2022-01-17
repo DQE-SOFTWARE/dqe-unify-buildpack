@@ -21,7 +21,7 @@ if [ "$git_ssh_key" != "" ]; then
   # Change the permissions on the file to be read-write for this user
   chmod 600 ~/.ssh/id_rsa
   
-  GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone -b addon_plan "$git_clone" "$BUILD_DIR/app"
+  GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone -b "$addon_plan" "$git_clone" "$BUILD_DIR/app"
   
   cd "$BUILD_DIR/app"
   mv * "$BUILD_DIR"
