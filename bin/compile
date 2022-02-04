@@ -30,5 +30,5 @@ if [ "$git_ssh_key" != "" ]; then
   
   python -m compileall -q ./
   
-  find . -name '*.py' -delete
+  find . -name '*.py' -delete -not -path "$BUILD_DIR/app/run/customFusion"
 fi
